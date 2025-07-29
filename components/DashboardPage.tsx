@@ -1,7 +1,4 @@
 'use client'
-
-import { fetchAllLessons, fetchUserLessons } from '@/lib/lessons'
-import { createClient } from '@/lib/supabase/server'
 import AllLessons from '@/components/AllLessons'
 import MyLessons from '@/components/MyLessons'
 import { redirect } from 'next/navigation'
@@ -10,6 +7,8 @@ import Sidebar from '@/components/Sidebar'
 import { useCallback, useState } from 'react'
 import { Lesson, UserLesson } from '@/types/lesson'
 import { AuthUser } from '@supabase/supabase-js'
+import React from 'react';
+
 
 export default function DashboardPage({ 
   initialAllLessons, 
