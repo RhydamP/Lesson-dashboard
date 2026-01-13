@@ -1,24 +1,22 @@
-# Dockerfile
 FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
+# Copy only dependency files
+COPY package.json package-lock.json ./
+
 # Install dependencies
-COPY package.json package-lock.json* ./
-RUN npm install
+RUN npm ci
 
-# Copy the rest of the app
+# Copy rest of the app
 COPY . .
-
-# Set environment variables (will use .env at runtime)
-ENV NODE_ENV production
 
 # Build Next.js
 RUN npm run build
 
-# Expose port
+ENV NODE_ENV=production
+ENV PORT=3000
+
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+CMD ["npx", "next", "start", "-p", "3000", "-H", "0.0.0.0"]

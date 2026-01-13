@@ -1,4 +1,3 @@
-# .github/workflows/ci.yml
 name: Next.js CI
 
 on:
@@ -12,24 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node.js
+      - name: ⚙️ Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: 📦 Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: 🧪 Run tests
-        run: npm run test
-        continue-on-error: true # remove this if you want builds to fail on test errors
+        run: npm test
+        continue-on-error: true
 
-      - name: 🏗️ Build Next.js app
+      - name: 🏗️ Build (no envs)
         run: npm run build
 
-      - name: ✅ Lint
+      - name: 🧹 Lint
         run: npm run lint
         continue-on-error: true
